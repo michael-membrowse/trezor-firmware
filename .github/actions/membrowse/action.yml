@@ -85,4 +85,6 @@ runs:
         elf: ${{ steps.cfg.outputs.artifacts }}/bootloader.elf
         ld: ${{ steps.cfg.outputs.memory_ld }} ${{ steps.cfg.outputs.linker_dir }}/bootloader.ld
         map_file: ${{ steps.cfg.outputs.artifacts }}/bootloader.map
+        # U5 bootloaders are zero-filled to their full flash area
+        skip_sections: .flash_padding
         api_key: ${{ inputs.api-key }}
