@@ -93,7 +93,9 @@ SECTIONS {
     . = ALIGN(8);
   } >BOOT_ARGS
 
-  .flash : {
+  /* Separate name so memory-usage tools can tell the zero fill from the code;
+     included in the binary via elf_sections in the bootloader project.toml */
+  .flash_padding : {
     /* Pad the rest of bootloader area with zeros */
     __flash_padding_start = .;
     BYTE(0x00)
