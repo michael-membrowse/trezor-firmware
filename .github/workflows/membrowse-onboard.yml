@@ -8,6 +8,11 @@ on:
         required: true
         default: '100'
         type: string
+      targets:
+        description: 'Space-separated target names to onboard (empty = all)'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -24,7 +29,15 @@ jobs:
 
       - name: Load target matrix
         id: set-matrix
-        run: echo "matrix=$(jq -c '.' .github/membrowse-targets.json)" >> $GITHUB_OUTPUT
+        env:
+          TARGETS: ${{ github.event.inputs.targets }}
+        run: |
+          matrix=$(jq -c --arg t "$TARGETS" \
+            '($t | split(" ") | map(select(. != ""))) as $sel
+             | map(select(($sel | length) == 0 or (.target_name | IN($sel[]))))' \
+            .github/membrowse-targets.json)
+          echo "$matrix" | jq -r '.[].target_name'
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   onboard:
     name: Onboard (${{ matrix.target_name }})
@@ -54,7 +67,8 @@ jobs:
       - uses: ./.github/actions/environment
 
       - name: Run MemBrowse Onboard Action
-        uses: membrowse/membrowse-action/onboard-action@v1
+        # Unreleased main: forced checkouts (#193); builds rewrite tracked files
+        uses: membrowse/membrowse-action/onboard-action@97eea71a43bef6742ea30d456d5ee9b8a52f6d0e
         with:
           target_name: ${{ matrix.target_name }}
           num_commits: ${{ github.event.inputs.num_commits }}

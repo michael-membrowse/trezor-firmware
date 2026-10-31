@@ -111,7 +111,7 @@
     "target_name": "T3T1-firmware",
     "build_cmd": "nix-shell --run \"uv run make -C core build_firmware TREZOR_MODEL=T3T1 PYOPT=1\"",
     "elf": "core/build/artifacts/T3T1/firmware.elf",
-    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u5g/firmware.ld",
+    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u58/firmware.ld",
     "map_file": "core/build/artifacts/T3T1/firmware.map",
     "linker_vars": "",
     "skip_sections": ".heap"
@@ -120,7 +120,7 @@
     "target_name": "T3T1-firmware-btconly",
     "build_cmd": "nix-shell --run \"uv run make -C core build_firmware TREZOR_MODEL=T3T1 PYOPT=1 BITCOIN_ONLY=1\"",
     "elf": "core/build/artifacts/T3T1/firmware.elf",
-    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u5g/firmware.ld",
+    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u58/firmware.ld",
     "map_file": "core/build/artifacts/T3T1/firmware.map",
     "linker_vars": "",
     "skip_sections": ".heap"
@@ -129,7 +129,7 @@
     "target_name": "T3T1-kernel",
     "build_cmd": "nix-shell --run \"uv run make -C core build_firmware TREZOR_MODEL=T3T1 PYOPT=1\"",
     "elf": "core/build/artifacts/T3T1/kernel.elf",
-    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u5g/kernel.ld",
+    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u58/kernel.ld",
     "map_file": "core/build/artifacts/T3T1/kernel.map",
     "linker_vars": "",
     "skip_sections": ""
@@ -138,7 +138,7 @@
     "target_name": "T3T1-bootloader",
     "build_cmd": "nix-shell --run \"uv run make -C core build_bootloader TREZOR_MODEL=T3T1 PYOPT=1\"",
     "elf": "core/build/artifacts/T3T1/bootloader.elf",
-    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u5g/bootloader.ld",
+    "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u58/bootloader.ld",
     "map_file": "core/build/artifacts/T3T1/bootloader.map",
     "linker_vars": "",
     "skip_sections": ".flash_padding"
