@@ -31,9 +31,14 @@ SECTIONS {
     KEEP(*(.header));
   } >FLASH AT>FLASH
 
-  .flash : ALIGN(512) {
+  /* The kernel image (padded to the coreapp alignment) gets its own output
+     section so memory-usage tools can tell it from the coreapp */
+  .kernel : ALIGN(512) {
     KEEP(*(.kernel));
     . = ALIGN(COREAPP_ALIGNMENT);
+  } >FLASH AT>FLASH
+
+  .flash : ALIGN(COREAPP_ALIGNMENT) {
     KEEP(*(.coreapp_header));
     . = ALIGN(4);
     *(.text*);
