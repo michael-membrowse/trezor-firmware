@@ -77,7 +77,7 @@ jobs:
           ld: ${{ matrix.ld }}
           map_file: ${{ matrix.map_file }}
           linker_vars: ${{ matrix.linker_vars }}
-          # Sections that fill their regions by design, e.g. the MicroPython .heap
+          # .heap (firmware) and .flash_padding (U5 bootloaders) fill their regions by design
           skip_sections: ${{ matrix.skip_sections }}
           exclude_alignment: 'true'
           binary_search: 'true'

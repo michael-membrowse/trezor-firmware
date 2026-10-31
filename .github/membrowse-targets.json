@@ -105,7 +105,7 @@
     "ld": "core/embed/models/T3B1/memory.ld core/embed/sys/linker/stm32u58/bootloader.ld",
     "map_file": "core/build/artifacts/T3B1/bootloader.map",
     "linker_vars": "",
-    "skip_sections": ""
+    "skip_sections": ".flash_padding"
   },
   {
     "target_name": "T3T1-firmware",
@@ -141,7 +141,7 @@
     "ld": "core/embed/models/T3T1/memory.ld core/embed/sys/linker/stm32u58/bootloader.ld",
     "map_file": "core/build/artifacts/T3T1/bootloader.map",
     "linker_vars": "",
-    "skip_sections": ""
+    "skip_sections": ".flash_padding"
   },
   {
     "target_name": "T3W1-firmware",
@@ -186,6 +186,6 @@
     "ld": "core/embed/models/T3W1/memory.ld core/embed/sys/linker/stm32u5g/bootloader.ld",
     "map_file": "core/build/artifacts/T3W1/bootloader.map",
     "linker_vars": "",
-    "skip_sections": ""
+    "skip_sections": ".flash_padding"
   }
 ]
