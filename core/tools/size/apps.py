@@ -32,9 +32,10 @@ def apps_categories(row: DataRow) -> str | None:
 if __name__ == "__main__":
     BS = (
         BinarySize()
-        .load_file(BIN_TO_ANALYZE, sections=(".flash", ".flash2"))
+        .load_file(BIN_TO_ANALYZE, sections=(".kernel", ".flash", ".flash2"))
         .use_map_file(
-            CORE_DIR / "build/firmware/firmware.map", sections=(".flash", ".flash2")
+            CORE_DIR / "build/firmware/firmware.map",
+            sections=(".kernel", ".flash", ".flash2"),
         )
         .add_basic_info()
         .aggregate()
