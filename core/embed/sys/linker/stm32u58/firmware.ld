@@ -20,7 +20,7 @@ _bss_section_end = ADDR(.bss) + SIZEOF(.bss);
 _tls_section_start = ADDR(.tls);
 _tls_section_size = SIZEOF(.tls);
 
-_codelen = SIZEOF(.flash) + SIZEOF(.data);
+_codelen = SIZEOF(.kernel) + SIZEOF(.flash) + SIZEOF(.data);
 
 _heap_start = ADDR(.heap);
 _heap_end = ADDR(.heap) + SIZEOF(.heap);
@@ -35,9 +35,14 @@ SECTIONS {
     . = ALIGN(CODE_ALIGNMENT);
   } >FLASH AT>FLASH
 
-  .flash : ALIGN(CODE_ALIGNMENT) {
+  /* The kernel image (padded to the coreapp alignment) gets its own output
+     section so memory-usage tools can tell it from the coreapp */
+  .kernel : ALIGN(CODE_ALIGNMENT) {
     KEEP(*(.kernel));
     . = ALIGN(COREAPP_ALIGNMENT);
+  } >FLASH AT>FLASH
+
+  .flash : ALIGN(COREAPP_ALIGNMENT) {
     KEEP(*(.coreapp_header));
     . = ALIGN(4);
     *(.text*);

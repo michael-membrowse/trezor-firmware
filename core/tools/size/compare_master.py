@@ -70,12 +70,13 @@ def compare_master(fw_location: str, report_file: str | None) -> None:
 
     show_binaries_diff(old=master_bin, new=fw_location, sections=sections)
 
-    curr = get_sections_sizes(fw_location, sections)
-    curr_flash = curr[".flash"] // 1024
+    # All sections: firmware built before the `.kernel` split has the kernel in `.flash`
+    curr = get_sections_sizes(fw_location, None)
+    curr_flash = (curr.get(".kernel", 0) + curr[".flash"]) // 1024
     curr_flash_2 = curr[".flash2"] // 1024
 
-    master = get_sections_sizes(master_bin, sections)
-    master_flash = master[".flash"] // 1024
+    master = get_sections_sizes(master_bin, None)
+    master_flash = (master.get(".kernel", 0) + master[".flash"]) // 1024
     master_flash_2 = master[".flash2"] // 1024
 
     print()
